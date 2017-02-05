@@ -3,18 +3,13 @@
 //Tyler Phillips, Kevin Kolcheck, Benjamin Fulkerson-Bird, Daniel Adams
 
 #include "random.hpp"
+#include "time.hpp"
 
 #include <iostream>
 #include <sstream>
-#include <ctime>
 #include <string>
 
 using namespace std;
-
-string formatTimeSpec(timespec timeSpec){
-	string formatDate;
-	return formatDate;
-}
 
 int main(int argc, char *argv[]){
 	if (argc != 3){ // check for two command-line arguments
@@ -42,15 +37,13 @@ int main(int argc, char *argv[]){
 
 	cout << "psleep program!" << endl;
 	cout << "iterations: " << iterations << endl;
-	cout << "mean: " << mean << endl;
+	cout << "mean: " << mean << endl << endl;
+	cout << iterations << " iterations in approx. mean interval " << mean << " seconds" << endl;
 
 	int seed = 0;   // we will use srand(time(NULL)) to seed our pseudo random number generator
 	random_seed(seed);
 
-	timespec timeSpec;
-	clock_gettime(CLOCK_REALTIME, &timeSpec);
-
-
+	printDateTime();
 
 	double random = 0.0;
 	for(int i = 0; i < iterations; i++){
