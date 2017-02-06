@@ -3,6 +3,7 @@
 #include <time.h>
 #include <iostream>
 #include <string.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -40,7 +41,7 @@ int timeSpecConversion(char *buffer, int len, timespec *time){
 
 															// http://en.cppreference.com/w/cpp/chrono/c/strftime
 	check = strftime(buffer, len, "%Y/%m/%d %H:%M:%S", &t); // put time/date into buffer (strftime), still will need to put in nanoseconds
-	if(check == 0){										// if strftime returns 0,
+	if(check == 0){											// if strftime returns 0,
 		return 2; 											// something went wrong with formating time/date
 	}
 
@@ -53,4 +54,17 @@ int timeSpecConversion(char *buffer, int len, timespec *time){
 	return 0;
 }
 
-
+//Execute nanosleep
+int nsleep(long nseconds) {
+	struct timespec tim, tim2;
+	tim.tv_sec = 0;
+	tim.tv_nsec = nseconds;
+	
+	if (nanosleep(&tim, &tim2) < 0){
+		cout << "Nano sleep failed" << endl;
+		return -1;
+	}
+	
+	cout << "Nano sleep successful" << endl;
+	return (0);
+}
